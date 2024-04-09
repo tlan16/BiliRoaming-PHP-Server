@@ -18,3 +18,4 @@ jobs:
           base: main
           head: main
         continue-on-error: true
+      - uses: gautamkrishnar/keepalive-workflow@v1
