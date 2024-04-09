@@ -4,7 +4,7 @@ if(!defined('SYSTEM')) {exit();}
 
 // 判断要转发的内容
 $path = explode('/index.php', $_SERVER['PHP_SELF'])[0];
-$query = str_replace("&&", "", str_replace("/&", "", $_SERVER['QUERY_STRING']));
+$query = array_key_exists('QUERY_STRING', $_SERVER) ? str_replace("&&", "", str_replace("/&", "", $_SERVER['QUERY_STRING'])) : "";
 // 修复参数开头为 & 的问题
 if (substr($query,0,1) == "&") {
 	$query = substr($query,1);
@@ -45,7 +45,7 @@ define('APPKEY', $check[0]);
 define('APPSEC', $check[1]);
 define('MOBI_APP', $check[2]);
 define('PLATFORM', $check[3]);
-define('ACCESS_KEY', substr(@$_GET['access_key'], 0, 32));
+define('ACCESS_KEY', substr(@$_GET['access_key'] ?? "", 0, 32));
 define('CID', @$_GET['cid']);
 define('EP_ID', @$_GET['ep_id']);
 define('SS_ID', @$_GET['season_id']);
